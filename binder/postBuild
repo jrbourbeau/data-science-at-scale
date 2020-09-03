@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# Install the JupyterLab dask-labextension
-jupyter labextension install dask-labextension
