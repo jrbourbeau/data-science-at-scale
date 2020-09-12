@@ -1,23 +1,13 @@
-name: repo2docker CI
-
+name: Binder
 on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.8
-
-      - name: Install repo2docker
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install jupyter-repo2docker
-
-      - name: Build Docker image
-        run: jupyter-repo2docker --no-run --debug .
+    - name: Cache binder build on mybinder.org
+      uses: jupyterhub/repo2docker-action@master
+      with:
+        NO_PUSH: true
+        MYBINDERORG_TAG: ${{ github.event.ref }}
